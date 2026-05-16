@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة رياض الخزامى للمقاولات المحدودة | إتقان بلا حدود</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            DEFAULT: '#c5a059',
+                            dark: '#a38446',
+                            light: '#dfc28d'
+                        },
+                        dark: {
+                            DEFAULT: '#0f172a',
+                            pure: '#000000',
+                            slate: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #000; }
+        .bg-gold-gradient { background: linear-gradient(135deg, #c5a059 0%, #a38446 100%); }
+        .text-gold-gradient {
+            background: linear-gradient(to right, #c5a059, #dfc28d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-overlay { background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.4), rgba(0,0,0,0.9)); }
+        [x-cloak] { display: none !important; }
+        .card-hover:hover { transform: translateY(-10px); border-color: #c5a059; }
+    </style>
+</head>
+<body class="text-white">
+
+    <nav class="bg-black/90 backdrop-blur-md border-b border-gold/20 sticky top-0 z-[100]" x-data="{ mobileMenu: false }">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="logo.jpg" alt="لوجو رياض الخزامى" class="h-16 w-auto brightness-110">
+                <div class="hidden sm:block border-r border-gold/30 pr-4">
+                    <h1 class="text-xl font-black tracking-tighter text-gold">رياض الخزامى</h1>
+                    <p class="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em]">للمقاولات المحدودة</p>
+                </div>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-10 font-bold text-sm">
+                <a href="#home" class="text-gold border-b-2 border-gold pb-1">الرئيسية</a>
+                <a href="#about" class="hover:text-gold transition">من نحن</a>
+                <a href="#services" class="hover:text-gold transition">خدماتنا</a>
+                <a href="#projects" class="hover:text-gold transition">المشاريع</a>
+                <a href="#partners" class="hover:text-gold transition">الشركاء</a>
+                <a href="#contact" class="bg-gold hover:bg-gold-dark text-black px-8 py-3 rounded-full transition-all active:scale-95 shadow-lg shadow-gold/20">اتصل بنا</a>
+            </div>
+
+            <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-gold text-2xl">
+                <i class="fas fa-bars-staggered"></i>
+            </button>
+        </div>
+
+        <div x-show="mobileMenu" x-cloak class="lg:hidden bg-dark-slate p-6 border-b border-gold/30">
+            <div class="flex flex-col gap-4 font-bold">
+                <a href="#home" @click="mobileMenu = false" class="text-gold">الرئيسية</a>
+                <a href="#about" @click="mobileMenu = false">من نحن</a>
+                <a href="#services" @click="mobileMenu = false">خدماتنا</a>
+                <a href="#projects" @click="mobileMenu = false">المشاريع</a>
+                <a href="#contact" @click="mobileMenu = false">تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="relative h-screen flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover scale-110 opacity-60 animate-pulse-slow">
+        </div>
+        <div class="absolute inset-0 hero-overlay z-10"></div>
+        
+        <div class="relative z-20 max-w-7xl mx-auto px-6 w-full">
+            <div class="max-w-4xl space-y-8">
+                <div class="inline-flex items-center gap-3 border border-gold/50 px-4 py-2 rounded-full text-gold text-xs font-bold tracking-widest uppercase">
+                    <span class="w-2 h-2 bg-gold rounded-full animate-ping"></span>
+                    نصنع الإنجاز في كل ركن بالمملكة
+                </div>
+                <h2 class="text-5xl md:text-8xl font-black leading-tight">بناء الغد <br><span class="text-gold-gradient italic">بدقة هندسية</span></h2>
+                <p class="text-xl text-gray-400 font-medium leading-relaxed max-w-2xl">
+                    شركة رياض الخزامى المحدودة: خبرة ممتدة في البنية التحتية، المنشآت الطبية، والأعمال الميكانيكية والكهربائية المتكاملة.
+                </p>
+                <div class="flex flex-wrap gap-6 pt-10">
+                    <a href="#contact" class="bg-gold-gradient text-black px-12 py-5 rounded-2xl font-black text-lg hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] transition-all">ابدأ مشروعك الآن</a>
+                    <a href="#projects" class="border-2 border-gold/30 text-white hover:bg-gold/10 px-12 py-5 rounded-2xl font-black text-lg transition-all">سجل المشاريع</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-dark-slate py-20 border-y border-gold/10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+            <div class="space-y-2">
+                <span class="block text-5xl font-black text-gold">29+</span>
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">عاماً من الخبرة</span>
+            </div>
+            <div class="space-y-2">
+                <span class="block text-5xl font-black text-gold">650+</span>
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">مشروع مكتمل</span>
+            </div>
+            <div class="space-y-2">
+                <span class="block text-5xl font-black text-gold">27M</span>
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">ميزانية أضخم المشاريع</span>
+            </div>
+            <div class="space-y-2">
+                <span class="block text-5xl font-black text-gold">100%</span>
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">جودة التنفيذ</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 bg-black relative">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-24 items-center">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" class="rounded-[3rem] border-b-8 border-gold shadow-2xl relative z-10">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-gold/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-6 -left-6 bg-gold p-8 rounded-3xl z-20 text-black font-black hidden md:block">
+                    <p class="text-3xl leading-tight italic">"الهندسة <br> فن الإتقان"</p>
+                </div>
+            </div>
+            <div class="space-y-10">
+                <h5 class="text-gold font-bold tracking-[0.5em] uppercase text-sm">عن الشركة</h5>
+                <h3 class="text-4xl md:text-6xl font-black leading-tight">شريككم الموثوق في <br> <span class="text-gold-gradient italic">عالم التشييد</span></h3>
+                <p class="text-gray-400 text-lg leading-relaxed">
+                    تأسست شركة رياض الخزامى المحدودة في عام 1995، وتمت إعادة هيكلتها لتواكب النهضة العمرانية الحديثة في المملكة. نحن متخصصون في تقديم حلول متكاملة تغطي كافة تخصصات الهندسة المدنية والميكانيكية والكهربائية (MEP).
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-gold text-3xl"><i class="fas fa-check-double"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white text-lg">الالتزام بالزمن</h4>
+                            <p class="text-xs text-gray-500 mt-1">نسلم مشاريعنا وفق الجداول الزمنية المحددة بدقة.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="text-gold text-3xl"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <h4 class="font-bold text-white text-lg">معايير السلامة</h4>
+                            <p class="text-xs text-gray-500 mt-1">تطبيق صارم لمعايير السلامة المهنية العالمية.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-32 bg-dark-slate">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-24">
+            <h2 class="text-gold font-black uppercase text-sm tracking-widest mb-4">خدماتنا الهندسية</h2>
+            <h3 class="text-4xl md:text-5xl font-black">حلول متكاملة تحت سقف واحد</h3>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="group bg-black/40 p-12 rounded-[2rem] border border-white/5 hover:border-gold transition-all card-hover">
+                <div class="bg-gold text-black w-16 h-16 rounded-2xl flex items-center justify-center mb-10 text-3xl shadow-lg shadow-gold/20">
+                    <i class="fas fa-hard-hat"></i>
+                </div>
+                <h4 class="text-2xl font-black mb-6">المقاولات المدنية</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">تنفيذ الهياكل الخرسانية، أعمال الحفر، والأساسات العميقة للمباني الشاهقة والطرق الرئيسية.</p>
+            </div>
+            <div class="group bg-black/40 p-12 rounded-[2rem] border border-white/5 hover:border-gold transition-all card-hover">
+                <div class="bg-gold text-black w-16 h-16 rounded-2xl flex items-center justify-center mb-10 text-3xl shadow-lg shadow-gold/20">
+                    <i class="fas fa-fan"></i>
+                </div>
+                <h4 class="text-2xl font-black mb-6">الأعمال الميكانيكية</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">توريد وتركيب أنظمة التكييف (HVAC)، شبكات مكافحة الحريق، والسباكة الصناعية للمنشآت الكبرى.</p>
+            </div>
+            <div class="group bg-black/40 p-12 rounded-[2rem] border border-white/5 hover:border-gold transition-all card-hover">
+                <div class="bg-gold text-black w-16 h-16 rounded-2xl flex items-center justify-center mb-10 text-3xl shadow-lg shadow-gold/20">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4 class="text-2xl font-black mb-6">الأعمال الكهربائية</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">تمديد شبكات الجهد العالي والمتوسط، لوحات التوزيع، وأنظمة الإنارة الحديثة وفق مواصفات سكيكو.</p>
+            </div>
+            <div class="group bg-black/40 p-12 rounded-[2rem] border border-white/5 hover:border-gold transition-all card-hover">
+                <div class="bg-gold text-black w-16 h-16 rounded-2xl flex items-center justify-center mb-10 text-3xl shadow-lg shadow-gold/20">
+                    <i class="fas fa-hospital-alt"></i>
+                </div>
+                <h4 class="text-2xl font-black mb-6">المنشآت الطبية</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">تجهيز غرف العمليات، أنظمة استدعاء الممرضات، والعزل الطبي المتخصص للمستشفيات والمراكز الصحية.</p>
+            </div>
+            <div class="group bg-black/40 p-12 rounded-[2rem] border border-white/5 hover:border-gold transition-all card-hover">
+                <div class="bg-gold text-black w-16 h-16 rounded-2xl flex items-center justify-center mb-10 text-3xl shadow-lg shadow-gold/20">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h4 class="text-2xl font-black mb-6">التيار المنخفض</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">تركيب أنظمة المراقبة (CCTV)، إنذار الحريق، وأنظمة إدارة المباني الذكية (BMS).</p>
+            </div>
+            <div class="group bg-black/40 p-12 rounded-[2rem] border border-white/5 hover:border-gold transition-all card-hover">
+                <div class="bg-gold text-black w-16 h-16 rounded-2xl flex items-center justify-center mb-10 text-3xl shadow-lg shadow-gold/20">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h4 class="text-2xl font-black mb-6">تقنية المعلومات</h4>
+                <p class="text-gray-500 text-sm leading-relaxed">تجهيز مراكز البيانات، كابلات الألياف الضوئية، والربط الشبكي المتكامل للمشاريع الإدارية.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-32 bg-black">
+        <div class="max-w-7xl mx-auto px-6 mb-20 flex flex-col md:flex-row justify-between items-end gap-10">
+            <div class="space-y-4">
+                <h5 class="text-gold font-bold uppercase tracking-widest text-sm">سجل الإنجازات</h5>
+                <h3 class="text-4xl md:text-5xl font-black">مشاريعنا في أنحاء المملكة</h3>
+            </div>
+            <p class="max-w-md text-gray-500 text-sm">نستعرض لكم جزءاً من بصمتنا الهندسية في المشاريع التجارية، الطبية، والبنية التحتية المنفذة بأعلى معايير الجودة.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="relative group h-[500px] overflow-hidden rounded-3xl lg:col-span-2">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-10 flex flex-col justify-end">
+                    <span class="text-gold font-bold mb-2 uppercase text-xs">مشاريع إدارية</span>
+                    <h4 class="text-2xl font-black text-white italic">مركز الأعمال الذكي - الرياض</h4>
+                </div>
+            </div>
+            <div class="relative group h-[500px] overflow-hidden rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-10 flex flex-col justify-end">
+                    <span class="text-gold font-bold mb-2 uppercase text-xs">قطاع طبي</span>
+                    <h4 class="text-xl font-black text-white italic">مجمع طبي متكامل</h4>
+                </div>
+            </div>
+            <div class="relative group h-[500px] overflow-hidden rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-10 flex flex-col justify-end">
+                    <span class="text-gold font-bold mb-2 uppercase text-xs">بنية تحتية</span>
+                    <h4 class="text-xl font-black text-white italic">تطوير شبكة الطرق</h4>
+                </div>
+            </div>
+            <div class="relative group h-[400px] overflow-hidden rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <h4 class="text-lg font-black text-white italic">مشروع القطيف S.C</h4>
+                </div>
+            </div>
+            <div class="relative group h-[400px] overflow-hidden rounded-3xl lg:col-span-2">
+                <img src="https://images.unsplash.com/photo-1590644365607-1c5a519a7a37?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-10 flex flex-col justify-end text-left">
+                    <h4 class="text-2xl font-black text-white italic text-right">أعمال التجهيزات الكهروميكانيكية</h4>
+                </div>
+            </div>
+            <div class="relative group h-[400px] overflow-hidden rounded-3xl">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <h4 class="text-lg font-black text-white italic">المقرات الإدارية</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="py-24 bg-dark-slate border-y border-gold/10 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <h6 class="text-center text-gray-500 font-bold text-xs uppercase tracking-[0.5em] mb-16">نعتز بثقتهم - شركاء النجاح</h6>
+            <div class="flex flex-wrap justify-center items-center gap-12 lg:gap-24 opacity-40 grayscale hover:grayscale-0 transition duration-700">
+                <span class="text-3xl font-black text-white hover:text-gold transition">ARAMCO</span>
+                <span class="text-3xl font-black text-white hover:text-gold transition">SABIC</span>
+                <span class="text-3xl font-black text-white hover:text-gold transition">STC</span>
+                <span class="text-3xl font-black text-white hover:text-gold transition">NEOM</span>
+                <span class="text-3xl font-black text-white hover:text-gold transition">MAADEN</span>
+                <span class="text-3xl font-black text-white hover:text-gold transition">RED SEA</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-black overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-24">
+            <div class="space-y-12">
+                <div class="space-y-4 text-right">
+                    <h5 class="text-gold font-bold uppercase tracking-widest text-sm">دعنا نتحدث</h5>
+                    <h3 class="text-4xl md:text-6xl font-black leading-tight">ابدأ مشروعك القادم <br> <span class="text-gold-gradient">مع فريق المحترفين</span></h3>
+                    <p class="text-gray-500 text-lg">فريقنا الهندسي متاح دائماً لاستقبال استفساراتكم وتقديم الدراسات الفنية اللازمة لمشاريعكم.</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="flex items-center gap-8 p-8 bg-dark-slate rounded-3xl border-r-8 border-gold hover:shadow-2xl hover:shadow-gold/10 transition-all">
+                        <div class="bg-gold text-black w-14 h-14 flex items-center justify-center rounded-2xl text-2xl shadow-xl shadow-gold/20"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-black mb-1">خط التواصل السريع</p>
+                            <p class="text-2xl font-black text-white tracking-widest" dir="ltr">+966 54 994 1540</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-8 p-8 bg-dark-slate rounded-3xl border-r-8 border-gold hover:shadow-2xl hover:shadow-gold/10 transition-all">
+                        <div class="bg-gold text-black w-14 h-14 flex items-center justify-center rounded-2xl text-2xl shadow-xl shadow-gold/20"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500 font-black mb-1">البريد الإلكتروني</p>
+                            <p class="text-xl font-black text-white">info@riyadhalkozhama.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-dark-slate p-12 lg:p-16 rounded-[3rem] shadow-2xl relative border border-white/5" x-data="contactHandler()">
+                <div class="absolute -top-10 -left-10 w-40 h-40 bg-gold/10 rounded-full blur-3xl"></div>
+                <h4 class="text-2xl font-black mb-10 text-gold italic">إرسال طلب مشروع</h4>
+                <form @submit.prevent="sendWA" class="space-y-6">
+                    <input type="text" x-model="name" placeholder="اسم الشركة / العميل" required class="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-5 focus:border-gold outline-none text-white transition">
+                    <input type="tel" x-model="phone" placeholder="رقم الجوال" required class="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-5 focus:border-gold outline-none text-white transition">
+                    <select x-model="service" class="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-5 focus:border-gold outline-none text-white transition">
+                        <option value="عام">نوع التخصص الهندسي</option>
+                        <option value="مقاولات مدنية">مقاولات مدنية</option>
+                        <option value="أعمال كهروميكانيكية">أعمال كهروميكانيكية</option>
+                        <option value="منشآت طبية">منشآت طبية</option>
+                        <option value="بنية تحتية">بنية تحتية</option>
+                    </select>
+                    <textarea x-model="message" placeholder="وصف موجز للمشروع المطلوب..." rows="4" class="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-5 focus:border-gold outline-none text-white transition"></textarea>
+                    <button type="submit" class="w-full bg-gold-gradient text-black font-black text-xl py-6 rounded-2xl hover:shadow-[0_0_40px_rgba(197,160,89,0.3)] transition-all flex items-center justify-center gap-4 active:scale-95">
+                        <i class="fab fa-whatsapp text-3xl"></i> إرسال عبر واتساب الرسمي
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-white pt-24 pb-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+            <div class="space-y-8">
+                <img src="logo.jpg" alt="Logo Footer" class="h-24 brightness-110">
+                <p class="text-gray-500 leading-relaxed text-sm">شركة رياض الخزامى للمقاولات المحدودة - خبرة ممتدة في البناء والتشييد وتطوير البنية التحتية في المملكة العربية السعودية.</p>
+            </div>
+            <div class="space-y-8">
+                <h4 class="text-xl font-black border-r-4 border-gold pr-4">روابط الوصول</h4>
+                <ul class="space-y-4 text-gray-500 font-bold text-sm">
+                    <li><a href="#about" class="hover:text-gold transition">عن الشركة</a></li>
+                    <li><a href="#services" class="hover:text-gold transition">خدماتنا الهندسية</a></li>
+                    <li><a href="#projects" class="hover:text-gold transition">معرض المشاريع</a></li>
+                    <li><a href="#contact" class="hover:text-gold transition">تواصل معنا</a></li>
+                </ul>
+            </div>
+            <div class="space-y-8">
+                <h4 class="text-xl font-black border-r-4 border-gold pr-4">التخصصات</h4>
+                <ul class="space-y-4 text-gray-500 text-sm">
+                    <li>أعمال البنية التحتية</li>
+                    <li>المنشآت الطبية المتخصصة</li>
+                    <li>الأنظمة الكهروميكانيكية</li>
+                    <li>أعمال التشطيبات الفاخرة</li>
+                </ul>
+            </div>
+            <div class="space-y-8">
+                <h4 class="text-xl font-black border-r-4 border-gold pr-4">المقر الرئيسي</h4>
+                <p class="text-gray-500 text-sm">الرياض، حي السليمانية، <br> المملكة العربية السعودية</p>
+                <div class="flex gap-4 text-2xl">
+                    <a href="#" class="text-gray-700 hover:text-gold"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-gray-700 hover:text-gold"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-700 hover:text-gold"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 border-t border-white/5 pt-10 text-center text-gray-700 text-[10px] uppercase tracking-[0.4em]">
+            <p>&copy; 2026 جميع الحقوق محفوظة لشركة رياض الخزامى للمقاولات المحدودة</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/966549941540" target="_blank" class="fixed bottom-10 left-10 z-[200] bg-[#25D366] text-white p-6 rounded-full shadow-2xl hover:scale-110 transition-all animate-bounce">
+        <i class="fab fa-whatsapp text-4xl"></i>
+    </a>
+
+    <script>
+        function contactHandler() {
+            return {
+                name: '',
+                phone: '',
+                service: 'عام',
+                message: '',
+                sendWA() {
+                    const number = "966549941540";
+                    const fullText = `*استفسار مشروع جديد*\n\nالاسم: ${this.name}\nالجوال: ${this.phone}\nالتخصص: ${this.service}\nالرسالة: ${this.message}`;
+                    window.open(`https://wa.me/${number}?text=${encodeURIComponent(fullText)}`, '_blank');
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
