@@ -32,7 +32,7 @@
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; font-size: 16px; }
+  html { scroll-behavior: smooth; font-size: 16px; background: #0A0A0A; }
 
   body {
     font-family: var(--font-main);
@@ -609,10 +609,7 @@
     cursor: pointer;
     aspect-ratio: 4/3;
   }
-  .project-card:first-child {
-    grid-row: span 2;
-    aspect-ratio: auto;
-  }
+  /* grid-row span removed for filter compatibility */
 
   .project-img {
     width: 100%;
@@ -1114,6 +1111,285 @@
   .footer-bottom-links a { color: var(--gray); text-decoration: none; font-size: 0.82rem; transition: color 0.3s; }
   .footer-bottom-links a:hover { color: var(--gold); }
 
+  /* ══════════════════════════════════════════
+     PROFILE CTA STRIP
+  ══════════════════════════════════════════ */
+  .profile-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 28px 40px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.03) 100%);
+    border: 1px solid rgba(201,168,76,0.3);
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .profile-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(201,168,76,0.06) 0%, transparent 100%);
+  }
+  .profile-strip-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+  .profile-strip-icon {
+    width: 56px; height: 56px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .profile-strip-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .profile-strip-info p { font-size: 0.82rem; color: var(--gray); }
+  .profile-strip-btns { display: flex; gap: 14px; flex-wrap: wrap; position: relative; }
+  .btn-sm {
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    border: none;
+  }
+  .btn-sm-gold { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--black); box-shadow: 0 4px 14px rgba(201,168,76,0.3); }
+  .btn-sm-gold:hover { box-shadow: 0 6px 24px rgba(201,168,76,0.5); transform: translateY(-2px); }
+  .btn-sm-outline { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.5); }
+  .btn-sm-outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+
+  /* ══════════════════════════════════════════
+     FILTER TABS
+  ══════════════════════════════════════════ */
+  .filter-tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .filter-tab {
+    padding: 10px 24px;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--gray);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+  }
+  .filter-tab i { font-size: 0.8rem; }
+  .filter-tab:hover { color: var(--gold); border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.05); }
+  .filter-tab.active {
+    color: var(--black);
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-color: var(--gold);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+  }
+  .filter-count {
+    background: rgba(0,0,0,0.2);
+    color: inherit;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .filter-tab.active .filter-count { background: rgba(0,0,0,0.25); }
+
+  /* ══════════════════════════════════════════
+     LIGHTBOX
+  ══════════════════════════════════════════ */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    animation: fadeInUp 0.35s ease both;
+  }
+  .lightbox-img {
+    width: 100%;
+    max-height: 65vh;
+    object-fit: cover;
+    display: block;
+  }
+  .lightbox-body {
+    background: var(--dark2);
+    padding: 28px 32px;
+    border: 1px solid rgba(201,168,76,0.2);
+    border-top: none;
+  }
+  .lightbox-tag {
+    display: inline-block;
+    padding: 3px 14px;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    border: 1px solid rgba(201,168,76,0.3);
+  }
+  .lightbox-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+  .lightbox-desc { color: var(--gray); font-size: 0.9rem; line-height: 1.8; }
+  .lightbox-loc { margin-top: 12px; color: var(--gold); font-size: 0.82rem; display: flex; align-items: center; gap: 6px; }
+  .lightbox-close {
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 42px; height: 42px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+    z-index: 2;
+  }
+  .lightbox-close:hover { background: var(--gold-light); transform: rotate(90deg); }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px; height: 46px;
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+    z-index: 2;
+  }
+  .lightbox-nav:hover { background: var(--gold); color: var(--black); }
+  .lightbox-prev { right: -22px; }
+  .lightbox-next { left: -22px; }
+  @media (max-width: 640px) {
+    .lightbox-prev { right: 8px; }
+    .lightbox-next { left: 8px; }
+  }
+
+  /* ══════════════════════════════════════════
+     CERTIFICATIONS STRIP
+  ══════════════════════════════════════════ */
+  .certs-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.15);
+    margin-top: 60px;
+  }
+  .cert-item {
+    background: var(--dark);
+    padding: 28px 20px;
+    text-align: center;
+    transition: var(--transition);
+  }
+  .cert-item:hover { background: rgba(201,168,76,0.05); }
+  .cert-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: 12px; }
+  .cert-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 4px; }
+  .cert-desc { font-size: 0.75rem; color: var(--gray); line-height: 1.6; }
+  @media (max-width: 640px) { .certs-strip { grid-template-columns: 1fr 1fr; } }
+
+  /* ══════════════════════════════════════════
+     GOOGLE MAPS
+  ══════════════════════════════════════════ */
+  .map-wrap {
+    margin-top: 60px;
+    border: 1px solid rgba(201,168,76,0.2);
+    overflow: hidden;
+    position: relative;
+  }
+  .map-header {
+    background: var(--dark2);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .map-header i { color: var(--gold); font-size: 1rem; }
+  .map-header span { font-size: 0.88rem; color: var(--light-gray); font-weight: 600; }
+  .map-wrap iframe {
+    width: 100%;
+    height: 380px;
+    display: block;
+    filter: grayscale(0.4) brightness(0.85);
+    border: none;
+  }
+
+  /* ══════════════════════════════════════════
+     SOCIAL MEDIA IN FOOTER
+  ══════════════════════════════════════════ */
+  .social-label {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  /* ══════════════════════════════════════════
+     PROJECT CARD — hidden state for filter
+  ══════════════════════════════════════════ */
+  .project-card.hidden {
+    display: none;
+  }
+  .project-card {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* ══════════════════════════════════════════
+     HERO PROFILE BUTTONS ROW
+  ══════════════════════════════════════════ */
+  .hero-profile-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.8s 0.75s ease both;
+  }
+  .hero-profile-row span {
+    font-size: 0.78rem;
+    color: var(--gray);
+    letter-spacing: 1px;
+  }
+
+  /* ══════════════════════════════════════════
+     WHATSAPP FLOAT
+  ══════════════════════════════════════════ */
   /* ── WHATSAPP FLOAT ── */
   .whatsapp-float {
     position: fixed;
@@ -1191,6 +1467,159 @@
   .anim-delay-4 { transition-delay: 0.6s; }
   .anim-in { opacity: 1 !important; transform: none !important; }
 
+  /* ── LOGO IMAGE ── */
+  .logo-img {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+    filter: invert(1);
+    flex-shrink: 0;
+    transition: transform var(--transition), filter var(--transition);
+  }
+  .logo:hover .logo-img {
+    transform: scale(1.05);
+    filter: invert(1) drop-shadow(0 0 8px rgba(201,168,76,0.5));
+  }
+
+  /* ── PROJECTS BANNER ── */
+  .projects-banner {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    margin-bottom: 50px;
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .projects-banner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+    transition: transform 0.8s ease;
+    display: block;
+  }
+  .projects-banner:hover img { transform: scale(1.04); }
+  .projects-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 60px;
+    gap: 24px;
+  }
+  .projects-banner-icon {
+    width: 90px; height: 90px;
+    border: 2px solid rgba(201,168,76,0.5);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+  .projects-banner-label span {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .projects-banner-label h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  /* ── CIVIL WORKS GALLERY ── */
+  .civil-gallery { margin-bottom: 50px; }
+  .civil-gallery-label { text-align: center; margin-bottom: 24px; }
+
+  .civil-gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 200px 200px;
+    gap: 12px;
+  }
+  .civil-img-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .civil-img-card--tall {
+    grid-row: span 2;
+  }
+  .civil-img-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.65);
+    transition: transform 0.7s ease, filter 0.5s ease;
+  }
+  .civil-img-card:hover img {
+    transform: scale(1.07);
+    filter: brightness(0.8);
+  }
+  .civil-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+    gap: 8px;
+    transition: background 0.4s;
+  }
+  .civil-img-card:hover .civil-img-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(201,168,76,0.1) 100%);
+  }
+  .civil-img-overlay i {
+    font-size: 1.8rem;
+    color: var(--gold);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+  }
+  .civil-img-card:hover .civil-img-overlay i {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .civil-img-overlay span {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .civil-gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .civil-img-card--tall { grid-row: span 1; height: 200px; }
+  }
+  @media (max-width: 500px) {
+    .civil-gallery-grid { grid-template-columns: 1fr; }
+    .civil-img-card { height: 180px; }
+  }
+
+  /* ── PARTNERS IMPROVED ── */
+  .partner-logo {
+    gap: 14px;
+  }
+  .partner-logo i {
+    color: rgba(201,168,76,0.5);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: color 0.3s;
+  }
+  .partner-logo:hover i { color: var(--gold); }
+
   /* ── DIVIDERS ── */
   .gold-divider {
     display: flex;
@@ -1264,13 +1693,55 @@
     .stats-grid { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
-    .hero-stats { gap: 28px; flex-wrap: wrap; }
     .services-grid { grid-template-columns: 1fr; }
     .about-exp-badge { right: 10px; }
     .about-img-accent { display: none; }
     .footer-bottom { flex-direction: column; text-align: center; }
     .whatsapp-float { bottom: 20px; left: 20px; }
     #scrollTop { bottom: 20px; right: 20px; }
+
+    /* Logo */
+    .logo-img { height: 40px; }
+    .logo-name { font-size: 0.85rem; }
+    .logo-sub { font-size: 0.65rem; }
+
+    /* Hero */
+    .hero-content { padding-top: 70px; }
+    .hero-desc { font-size: 0.95rem; margin-bottom: 32px; line-height: 1.8; }
+    .hero-stats { gap: 20px; flex-wrap: wrap; margin-top: 44px; padding-top: 24px; }
+    .hero-stat-num { font-size: 1.7rem; }
+    .hero-stat-label { font-size: 0.7rem; }
+    .hero-btns { gap: 12px; }
+    .hero-badge span { letter-spacing: 1.5px; }
+
+    /* About image */
+    .about-img-main { height: 280px; }
+
+    /* Projects banner */
+    .projects-banner { height: 200px; }
+    .projects-banner-overlay { padding: 0 24px; }
+    .projects-banner-icon { width: 56px; height: 56px; font-size: 1.4rem; }
+
+    /* Filter tabs – horizontal scroll */
+    .filter-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+    .filter-tabs::-webkit-scrollbar { height: 3px; }
+    .filter-tabs::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.4); border-radius: 2px; }
+    .filter-tab { flex-shrink: 0; padding: 8px 16px; font-size: 0.78rem; }
+
+    /* Map height */
+    .map-wrap iframe { height: 220px; }
+
+    /* Stat card */
+    .stat-card { padding: 36px 14px; }
+    .stat-num { font-size: 2.6rem; }
+  }
+
+  @media (max-width: 420px) {
+    .hero-btns { flex-direction: column; }
+    .hero-btns .btn { text-align: center; justify-content: center; }
+    .hero-stats { grid-template-columns: 1fr 1fr; display: grid; gap: 16px; }
+    .hero-stat-num { font-size: 1.5rem; }
+    .logo-name { display: none; }
   }
 </style>
 </head>
@@ -1280,7 +1751,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#hero" class="logo">
-        <div class="logo-icon"><i class="fas fa-building"></i></div>
+        <img src="logo.jpeg" alt="شركة رياض الخزامى المحدودة" class="logo-img">
         <div class="logo-text">
           <span class="logo-name">رياض الخزامى المحدودة</span>
           <span class="logo-sub">Riyadh Al Khozamah Co.</span>
@@ -1346,6 +1817,13 @@
         </a>
       </div>
 
+      <div class="hero-profile-row">
+        <span>بروفايل الشركة:</span>
+        <a href="profile.pdf" download="بروفايل-رياض-الخزامى.pdf" class="btn-sm btn-sm-gold">
+          <i class="fas fa-download"></i> تحميل البروفايل
+        </a>
+      </div>
+
       <div class="hero-stats">
         <div>
           <span class="hero-stat-num">+100</span>
@@ -1380,9 +1858,9 @@
     <div class="about-grid">
 
       <div class="about-img-wrap anim-right">
-        <img src="https://images.unsplash.com/photo-1541888081188-75242d54e4a2?w=800&q=80"
+        <img src="about-main.jpg"
              alt="أعمال الإنشاءات" class="about-img-main">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&q=80"
+        <img src="civil-main.jpg"
              alt="تفاصيل معمارية" class="about-img-accent">
         <div class="about-img-frame"></div>
         <div class="about-exp-badge">
@@ -1429,6 +1907,30 @@
         </ul>
       </div>
 
+    </div>
+  </div>
+
+  <!-- شريط الشهادات والإنجازات -->
+  <div class="certs-strip anim-up">
+    <div class="cert-item">
+      <div class="cert-icon"><i class="fas fa-award"></i></div>
+      <div class="cert-name">جودة معتمدة</div>
+      <div class="cert-desc">أعلى معايير ضبط الجودة في كل مشروع</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon"><i class="fas fa-shield-halved"></i></div>
+      <div class="cert-name">أمان وسلامة</div>
+      <div class="cert-desc">التزام تام بمعايير الصحة والسلامة المهنية</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon"><i class="fas fa-leaf"></i></div>
+      <div class="cert-name">استدامة بيئية</div>
+      <div class="cert-desc">ممارسات صديقة للبيئة في جميع مشاريعنا</div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-icon"><i class="fas fa-star"></i></div>
+      <div class="cert-name">+25 عاماً</div>
+      <div class="cert-desc">من التميز والخبرة المتراكمة في السوق السعودي</div>
     </div>
   </div>
 </section>
@@ -1527,85 +2029,180 @@
 
 <section id="projects" class="section-padding">
   <div class="container">
+
     <div class="text-center anim-up">
       <span class="section-label">أعمالنا ومشاريعنا</span>
       <h2 class="section-title">مشاريعنا الطبية والمدنية</h2>
-      <div class="gold-divider center">
-        <span class="line"></span><span class="diamond"></span><span class="line"></span>
-      </div>
-      <p class="section-subtitle">سجل حافل بالنجاحات مع كبرى الجهات الحكومية والخاصة في المملكة.</p>
+      <div class="gold-divider center"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+      <p class="section-subtitle">سجل حافل بالنجاحات مع كبرى الجهات الحكومية والخاصة في المملكة العربية السعودية.</p>
     </div>
 
-    <div class="projects-grid">
+    <!-- شريط البروفايل -->
+    <div class="profile-strip anim-up">
+      <div class="profile-strip-info">
+        <div class="profile-strip-icon"><i class="fas fa-file-alt"></i></div>
+        <div>
+          <h4>بروفايل شركة رياض الخزامى المحدودة</h4>
+          <p>تعرف على كامل خبراتنا، مشاريعنا، وشهاداتنا المعتمدة</p>
+        </div>
+      </div>
+      <div class="profile-strip-btns">
+        <a href="profile.pdf" download="بروفايل-رياض-الخزامى.pdf" class="btn-sm btn-sm-gold"><i class="fas fa-download"></i> تحميل البروفايل</a>
+      </div>
+    </div>
 
-      <div class="project-card anim-scale">
-        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80"
-             alt="تجهيزات المستشفيات وغرف العمليات" class="project-img">
+    <!-- بانر أعمال المنشآت -->
+    <div class="projects-banner anim-up">
+      <img src="civil-main.jpg" alt="أعمال المنشآت" style="object-position: center top;">
+      <div class="projects-banner-overlay">
+        <div class="projects-banner-label">
+          <span>أعمال المنشآت والبنية التحتية</span>
+          <h3>إنشاءات بمعايير<br><span style="color:var(--gold)">عالمية متميزة</span></h3>
+        </div>
+        <div class="projects-banner-icon"><i class="fas fa-hard-hat"></i></div>
+      </div>
+    </div>
+
+    <!-- معرض أعمال المنشآت — ضع صور شركتك هنا -->
+    <div class="civil-gallery anim-up">
+      <div class="civil-gallery-label"><span class="section-label" style="margin-bottom:0;">معرض صور أعمال المنشآت</span></div>
+      <div class="civil-gallery-grid">
+        <!-- صورة 1: احفظ صورتك باسم civil-1.jpg في نفس مجلد الموقع -->
+        <div class="civil-img-card">
+          <img src="civil-1.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=700&q=80'"
+               alt="الأعمال الإنشائية">
+          <div class="civil-img-overlay"><i class="fas fa-building"></i><span>الأعمال الإنشائية</span></div>
+        </div>
+        <!-- صورة 2 (كبيرة): صورة المشاريع المعمارية -->
+        <div class="civil-img-card civil-img-card--tall">
+          <img src="civil-main.jpg" alt="مشاريع معمارية وإنشائية" style="object-position: center top;">
+          <div class="civil-img-overlay"><i class="fas fa-drafting-compass"></i><span>التصميم والتخطيط المعماري</span></div>
+        </div>
+        <!-- صورة 3: احفظ صورتك باسم civil-3.jpg -->
+        <div class="civil-img-card">
+          <img src="civil-3.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&q=80'"
+               alt="تشطيبات داخلية">
+          <div class="civil-img-overlay"><i class="fas fa-paint-roller"></i><span>التشطيبات الداخلية</span></div>
+        </div>
+        <!-- صورة 4: احفظ صورتك باسم civil-4.jpg -->
+        <div class="civil-img-card">
+          <img src="civil-4.jpg"
+               onerror="this.src='https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=700&q=80'"
+               alt="بنية تحتية">
+          <div class="civil-img-overlay"><i class="fas fa-layer-group"></i><span>البنية التحتية</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تبويبات الفلتر -->
+    <div class="filter-tabs anim-up">
+      <button class="filter-tab active" data-filter="all"><i class="fas fa-th"></i> كل المشاريع <span class="filter-count">9</span></button>
+      <button class="filter-tab" data-filter="medical"><i class="fas fa-hospital"></i> المشاريع الطبية <span class="filter-count">3</span></button>
+      <button class="filter-tab" data-filter="civil"><i class="fas fa-hard-hat"></i> الأعمال المدنية <span class="filter-count">3</span></button>
+      <button class="filter-tab" data-filter="government"><i class="fas fa-landmark"></i> المشاريع الحكومية <span class="filter-count">2</span></button>
+      <button class="filter-tab" data-filter="tech"><i class="fas fa-microchip"></i> التقنية والأمنية <span class="filter-count">1</span></button>
+    </div>
+
+    <!-- شبكة المشاريع -->
+    <div class="projects-grid" id="projectsGrid">
+
+      <div class="project-card" data-category="medical" onclick="openLightbox(0)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" alt="مدينة الملك فهد الطبية" class="project-img">
         <div class="project-overlay"></div>
         <div class="project-content">
           <div class="project-tag">طبي / مستشفيات</div>
-          <div class="project-title">مدينة الملك فهد الطبية - Neuro ICU</div>
+          <div class="project-title">مدينة الملك فهد الطبية — Neuro ICU</div>
           <div class="project-desc">تجديد العناية المركزة للأعصاب لـ 15 مريضاً، مكاتب وغرف خدمات، وتركيب المعدات الطبية المتخصصة.</div>
           <div class="project-location"><i class="fas fa-map-marker-alt"></i> الرياض، المنطقة الوسطى</div>
         </div>
       </div>
 
-      <div class="project-card anim-scale anim-delay-1">
-        <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80"
-             alt="الرعاية الطبية" class="project-img">
+      <div class="project-card" data-category="medical" onclick="openLightbox(1)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&q=80" alt="مستشفى السجن المركزي" class="project-img">
         <div class="project-overlay"></div>
         <div class="project-content">
           <div class="project-tag">مشاريع طبية</div>
-          <div class="project-title">مستشفى السجن المركزي بوزارة الداخلية</div>
+          <div class="project-title">مستشفى السجن المركزي — وزارة الداخلية</div>
           <div class="project-desc">تجديد غرف العمليات والإفاقة، شبكة الغازات الطبية، والأنظمة الكهروميكانيكية المتكاملة.</div>
           <div class="project-location"><i class="fas fa-map-marker-alt"></i> القصيم، الرياض</div>
         </div>
       </div>
 
-      <div class="project-card anim-scale anim-delay-2">
-        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
-             alt="الأبراج والمباني التجارية" class="project-img">
+      <div class="project-card" data-category="medical" onclick="openLightbox(2)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=600&q=80" alt="وحدة الطب النووي" class="project-img">
+        <div class="project-overlay"></div>
+        <div class="project-content">
+          <div class="project-tag">طب نووي</div>
+          <div class="project-title">وحدة الطب النووي — مستشفى الملك عبدالعزيز</div>
+          <div class="project-desc">تركيب وتشطيب وحدة الطب النووي، الحماية الإشعاعية، وأنظمة الغازات الطبية المتخصصة.</div>
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> الرياض</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="civil" onclick="openLightbox(3)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="أبراج موبايلي" class="project-img">
         <div class="project-overlay"></div>
         <div class="project-content">
           <div class="project-tag">أعمال مدنية</div>
-          <div class="project-title">أبراج موبايلي (8 وحدات)</div>
-          <div class="project-desc">تنفيذ أنظمة التيار المنخفض والأنظمة الكهروميكانيكية مع الأعمال الخرسانية والتشطيبات.</div>
+          <div class="project-title">أبراج موبايلي — 8 وحدات</div>
+          <div class="project-desc">تنفيذ أنظمة التيار المنخفض والأنظمة الكهروميكانيكية مع الأعمال الخرسانية والتشطيبات الفاخرة.</div>
           <div class="project-location"><i class="fas fa-map-marker-alt"></i> جميع أنحاء المملكة</div>
         </div>
       </div>
 
-      <div class="project-card anim-scale anim-delay-1">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80"
-             alt="استوديوهات البث" class="project-img">
+      <div class="project-card" data-category="civil" onclick="openLightbox(4)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="قصر الأمير تركي" class="project-img">
         <div class="project-overlay"></div>
         <div class="project-content">
-          <div class="project-tag">تجهيزات تقنية</div>
-          <div class="project-title">مجموعة MBC Group</div>
-          <div class="project-desc">تصميم وتوريد وتركيب استوديوهات البث المتكاملة.</div>
+          <div class="project-tag">قصور وفلل فاخرة</div>
+          <div class="project-title">قصر الأمير تركي بن سلطان</div>
+          <div class="project-desc">أعمال الأنظمة الكهروميكانيكية والتشطيبات الفاخرة والأنظمة الأمنية المتكاملة.</div>
           <div class="project-location"><i class="fas fa-map-marker-alt"></i> الرياض</div>
         </div>
       </div>
 
-      <div class="project-card anim-scale anim-delay-2">
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80"
-             alt="الجامعات والمباني الأكاديمية" class="project-img">
+      <div class="project-card" data-category="civil" onclick="openLightbox(5)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="مشاريع البنية التحتية" class="project-img">
+        <div class="project-overlay"></div>
+        <div class="project-content">
+          <div class="project-tag">بنية تحتية</div>
+          <div class="project-title">مشاريع البنية التحتية — وزارة النقل</div>
+          <div class="project-desc">أعمال الحفر والردم والأساسات وتمديد شبكات الصرف الصحي والمياه والكهرباء.</div>
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> منطقة الرياض</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="government" onclick="openLightbox(6)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="جامعة الملك سعود" class="project-img">
         <div class="project-overlay"></div>
         <div class="project-content">
           <div class="project-tag">مشاريع حكومية</div>
-          <div class="project-title">جامعة الملك سعود (KSU)</div>
-          <div class="project-desc">أعمال الإصلاحات الإنشائية وحقن الأساسات وعزل المياه بالتعاون مع بن لادن للمقاولات.</div>
+          <div class="project-title">جامعة الملك سعود — KSU</div>
+          <div class="project-desc">أعمال الإصلاحات الإنشائية وحقن الأساسات وعزل المياه بالتعاون مع مجموعة بن لادن السعودية.</div>
           <div class="project-location"><i class="fas fa-map-marker-alt"></i> الرياض</div>
         </div>
       </div>
 
-      <div class="project-card anim-scale anim-delay-3">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80"
-             alt="مشاريع سكنية وقصور" class="project-img">
+      <div class="project-card" data-category="government" onclick="openLightbox(7)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=600&q=80" alt="الخطوط الحديدية السعودية" class="project-img">
         <div class="project-overlay"></div>
         <div class="project-content">
-          <div class="project-tag">قصور خاصة</div>
-          <div class="project-title">قصر الأمير تركي بن سلطان</div>
-          <div class="project-desc">أعمال الأنظمة الكهروميكانيكية والتشطيبات الفاخرة للقصور.</div>
+          <div class="project-tag">مشاريع حكومية</div>
+          <div class="project-title">مشروع قطار الشمال — الخطوط الحديدية السعودية</div>
+          <div class="project-desc">أعمال التشطيبات والبنية التحتية ومنظومة أنظمة التحكم والسلامة للمحطات.</div>
+          <div class="project-location"><i class="fas fa-map-marker-alt"></i> شمال المملكة</div>
+        </div>
+      </div>
+
+      <div class="project-card" data-category="tech" onclick="openLightbox(8)" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="MBC Group" class="project-img">
+        <div class="project-overlay"></div>
+        <div class="project-content">
+          <div class="project-tag">تقنية / بث</div>
+          <div class="project-title">مجموعة MBC Group — استوديوهات البث</div>
+          <div class="project-desc">تصميم وتوريد وتركيب استوديوهات البث الاحترافية المتكاملة وأنظمة التحكم والإضاءة.</div>
           <div class="project-location"><i class="fas fa-map-marker-alt"></i> الرياض</div>
         </div>
       </div>
@@ -1681,33 +2278,37 @@
     </div>
   </div>
 
-  <div class="partners-track-wrap">
+  <div class="partners-track-wrap" dir="ltr">
     <div class="partners-track">
-      <div class="partner-logo"><span>وزارة الدفاع</span></div>
-      <div class="partner-logo"><span>وزارة الصحة</span></div>
-      <div class="partner-logo"><span>وزارة الإسكان</span></div>
-      <div class="partner-logo"><span>وزارة النقل</span></div>
-      <div class="partner-logo"><span>وزارة التعليم</span></div>
-      <div class="partner-logo"><span>شركة المياه الوطنية</span></div>
-      <div class="partner-logo"><span>الشركة السعودية للكهرباء</span></div>
-      <div class="partner-logo"><span>STC</span></div>
-      <div class="partner-logo"><span>أرامكو الطبي</span></div>
-      <div class="partner-logo"><span>مكتبة جرير</span></div>
-      <div class="partner-logo"><span>جامعة الملك سعود</span></div>
-      <div class="partner-logo"><span>الخطوط الحديدية السعودية</span></div>
-      
-      <div class="partner-logo"><span>وزارة الدفاع</span></div>
-      <div class="partner-logo"><span>وزارة الصحة</span></div>
-      <div class="partner-logo"><span>وزارة الإسكان</span></div>
-      <div class="partner-logo"><span>وزارة النقل</span></div>
-      <div class="partner-logo"><span>وزارة التعليم</span></div>
-      <div class="partner-logo"><span>شركة المياه الوطنية</span></div>
-      <div class="partner-logo"><span>الشركة السعودية للكهرباء</span></div>
-      <div class="partner-logo"><span>STC</span></div>
-      <div class="partner-logo"><span>أرامكو الطبي</span></div>
-      <div class="partner-logo"><span>مكتبة جرير</span></div>
-      <div class="partner-logo"><span>جامعة الملك سعود</span></div>
-      <div class="partner-logo"><span>الخطوط الحديدية السعودية</span></div>
+      <div class="partner-logo"><i class="fas fa-shield-halved"></i><span>وزارة الدفاع</span></div>
+      <div class="partner-logo"><i class="fas fa-hospital"></i><span>وزارة الصحة</span></div>
+      <div class="partner-logo"><i class="fas fa-house-chimney"></i><span>وزارة الإسكان</span></div>
+      <div class="partner-logo"><i class="fas fa-road"></i><span>وزارة النقل</span></div>
+      <div class="partner-logo"><i class="fas fa-graduation-cap"></i><span>وزارة التعليم</span></div>
+      <div class="partner-logo"><i class="fas fa-droplet"></i><span>شركة المياه الوطنية</span></div>
+      <div class="partner-logo"><i class="fas fa-bolt"></i><span>الشركة السعودية للكهرباء</span></div>
+      <div class="partner-logo"><i class="fas fa-signal"></i><span>STC</span></div>
+      <div class="partner-logo"><i class="fas fa-stethoscope"></i><span>أرامكو الطبي</span></div>
+      <div class="partner-logo"><i class="fas fa-book-open"></i><span>مكتبة جرير</span></div>
+      <div class="partner-logo"><i class="fas fa-university"></i><span>جامعة الملك سعود</span></div>
+      <div class="partner-logo"><i class="fas fa-train"></i><span>الخطوط الحديدية السعودية</span></div>
+      <div class="partner-logo"><i class="fas fa-tv"></i><span>مجموعة MBC</span></div>
+      <div class="partner-logo"><i class="fas fa-gavel"></i><span>وزارة الداخلية</span></div>
+
+      <div class="partner-logo"><i class="fas fa-shield-halved"></i><span>وزارة الدفاع</span></div>
+      <div class="partner-logo"><i class="fas fa-hospital"></i><span>وزارة الصحة</span></div>
+      <div class="partner-logo"><i class="fas fa-house-chimney"></i><span>وزارة الإسكان</span></div>
+      <div class="partner-logo"><i class="fas fa-road"></i><span>وزارة النقل</span></div>
+      <div class="partner-logo"><i class="fas fa-graduation-cap"></i><span>وزارة التعليم</span></div>
+      <div class="partner-logo"><i class="fas fa-droplet"></i><span>شركة المياه الوطنية</span></div>
+      <div class="partner-logo"><i class="fas fa-bolt"></i><span>الشركة السعودية للكهرباء</span></div>
+      <div class="partner-logo"><i class="fas fa-signal"></i><span>STC</span></div>
+      <div class="partner-logo"><i class="fas fa-stethoscope"></i><span>أرامكو الطبي</span></div>
+      <div class="partner-logo"><i class="fas fa-book-open"></i><span>مكتبة جرير</span></div>
+      <div class="partner-logo"><i class="fas fa-university"></i><span>جامعة الملك سعود</span></div>
+      <div class="partner-logo"><i class="fas fa-train"></i><span>الخطوط الحديدية السعودية</span></div>
+      <div class="partner-logo"><i class="fas fa-tv"></i><span>مجموعة MBC</span></div>
+      <div class="partner-logo"><i class="fas fa-gavel"></i><span>وزارة الداخلية</span></div>
     </div>
   </div>
 </section>
@@ -1793,8 +2394,36 @@
       </div>
 
     </div>
+
+    <!-- خريطة الموقع -->
+    <div class="map-wrap anim-up">
+      <div class="map-header">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>شارع الأمير سلطان بن عبدالعزيز، الرياض 12223، المملكة العربية السعودية</span>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.285!2d46.6762!3d24.6966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sPrince%20Sultan%20St%2C%20Riyadh%20Saudi%20Arabia!5e0!3m2!1sar!2ssa!4v1716000000000"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
   </div>
 </section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <img src="" alt="" class="lightbox-img" id="lbImg">
+    <div class="lightbox-body">
+      <div class="lightbox-tag" id="lbTag"></div>
+      <div class="lightbox-title" id="lbTitle"></div>
+      <div class="lightbox-desc" id="lbDesc"></div>
+      <div class="lightbox-loc" id="lbLoc"><i class="fas fa-map-marker-alt"></i> <span id="lbLocText"></span></div>
+    </div>
+    <button class="lightbox-close" onclick="closeLightbox(event)"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)"><i class="fas fa-chevron-right"></i></button>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)"><i class="fas fa-chevron-left"></i></button>
+  </div>
+</div>
 
 <footer id="footer">
   <div class="container">
@@ -1802,13 +2431,21 @@
 
       <div class="footer-brand">
         <a href="#hero" class="footer-logo">
-          <div class="logo-icon"><i class="fas fa-building"></i></div>
+          <img src="logo.jpeg" alt="شركة رياض الخزامى المحدودة" class="logo-img">
           <div class="logo-text">
             <span class="logo-name">رياض الخزامى المحدودة</span>
             <span class="logo-sub">RIYADH AL KHOZAMAH</span>
           </div>
         </a>
         <p class="footer-desc">مزود خدمة متكامل للإنشاءات، الأعمال المدنية، والبنية التحتية، مع تخصص رائد في تجهيز المستشفيات والمشاريع الطبية الدقيقة.</p>
+        <span class="social-label">تابعونا على</span>
+        <div class="footer-social">
+          <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://wa.me/966549941540" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="http://www.riyadh-alkhozhama.com" target="_blank" class="social-link" title="الموقع الرسمي"><i class="fas fa-globe"></i></a>
+        </div>
       </div>
 
       <div class="footer-col">
@@ -1870,6 +2507,69 @@
 </button>
 
 <script>
+  /* ── PROJECTS DATA (for lightbox) ── */
+  const projectsData = [
+    { img:'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1200&q=80', tag:'طبي / مستشفيات', title:'مدينة الملك فهد الطبية — Neuro ICU', desc:'تجديد العناية المركزة للأعصاب لـ 15 مريضاً، مكاتب وغرف خدمات، وتركيب المعدات الطبية المتخصصة.', loc:'الرياض، المنطقة الوسطى' },
+    { img:'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=1200&q=80', tag:'مشاريع طبية', title:'مستشفى السجن المركزي — وزارة الداخلية', desc:'تجديد غرف العمليات والإفاقة، شبكة الغازات الطبية، والأنظمة الكهروميكانيكية المتكاملة.', loc:'القصيم، الرياض' },
+    { img:'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1200&q=80', tag:'طب نووي', title:'وحدة الطب النووي — مستشفى الملك عبدالعزيز', desc:'تركيب وتشطيب وحدة الطب النووي، الحماية الإشعاعية، وأنظمة الغازات الطبية المتخصصة.', loc:'الرياض' },
+    { img:'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80', tag:'أعمال مدنية', title:'أبراج موبايلي — 8 وحدات', desc:'تنفيذ أنظمة التيار المنخفض والأنظمة الكهروميكانيكية مع الأعمال الخرسانية والتشطيبات الفاخرة.', loc:'جميع أنحاء المملكة' },
+    { img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80', tag:'قصور وفلل فاخرة', title:'قصر الأمير تركي بن سلطان', desc:'أعمال الأنظمة الكهروميكانيكية والتشطيبات الفاخرة والأنظمة الأمنية المتكاملة.', loc:'الرياض' },
+    { img:'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80', tag:'بنية تحتية', title:'مشاريع البنية التحتية — وزارة النقل', desc:'أعمال الحفر والردم والأساسات وتمديد شبكات الصرف الصحي والمياه والكهرباء.', loc:'منطقة الرياض' },
+    { img:'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80', tag:'مشاريع حكومية', title:'جامعة الملك سعود — KSU', desc:'أعمال الإصلاحات الإنشائية وحقن الأساسات وعزل المياه بالتعاون مع مجموعة بن لادن السعودية.', loc:'الرياض' },
+    { img:'https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=1200&q=80', tag:'مشاريع حكومية', title:'مشروع قطار الشمال — الخطوط الحديدية السعودية', desc:'أعمال التشطيبات والبنية التحتية ومنظومة أنظمة التحكم والسلامة للمحطات.', loc:'شمال المملكة' },
+    { img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80', tag:'تقنية / بث', title:'مجموعة MBC Group — استوديوهات البث', desc:'تصميم وتوريد وتركيب استوديوهات البث الاحترافية المتكاملة وأنظمة التحكم والإضاءة.', loc:'الرياض' }
+  ];
+  let currentLbIndex = 0;
+
+  /* ── LIGHTBOX ── */
+  function openLightbox(index) {
+    currentLbIndex = index;
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function renderLightbox() {
+    const p = projectsData[currentLbIndex];
+    document.getElementById('lbImg').src = p.img;
+    document.getElementById('lbImg').alt = p.title;
+    document.getElementById('lbTag').textContent = p.tag;
+    document.getElementById('lbTitle').textContent = p.title;
+    document.getElementById('lbDesc').textContent = p.desc;
+    document.getElementById('lbLocText').textContent = p.loc;
+  }
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox') && !e.target.closest('.lightbox-close')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function navLightbox(dir) {
+    currentLbIndex = (currentLbIndex + dir + projectsData.length) % projectsData.length;
+    renderLightbox();
+  }
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    if (e.key === 'ArrowRight') navLightbox(-1);
+    if (e.key === 'ArrowLeft')  navLightbox(1);
+  });
+
+  /* ── PROJECT FILTER ── */
+  document.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('#projectsGrid .project-card').forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
   /* ── NAVBAR SCROLL ── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -1891,12 +2591,9 @@
   const animEls = document.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('anim-in');
-        observer.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('anim-in'); observer.unobserve(e.target); }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1 });
   animEls.forEach(el => observer.observe(el));
 
   /* ── COUNTER ANIMATION ── */
@@ -1921,44 +2618,24 @@
     }
   }
 
-  /* ── FAQ ACCORDION ── */
-  function toggleFaq(el) {
-    const item = el.parentElement;
-    const isOpen = item.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    if (!isOpen) item.classList.add('active');
-  }
-
-  /* ── FORM SUBMIT TO WHATSAPP ── */
+  /* ── FORM TO WHATSAPP ── */
   function submitToWhatsApp() {
-    const name = document.getElementById('wa_name').value;
+    const name    = document.getElementById('wa_name').value.trim();
     const service = document.getElementById('wa_service').value;
-    const message = document.getElementById('wa_message').value;
-    const phone = "966549941540"; // رقم الواتساب الخاص بك
-
-    if (!name.trim() || !message.trim()) {
-      alert("عفواً، يرجى كتابة الاسم وتفاصيل المشروع قبل الإرسال.");
-      return;
-    }
-
-    const text = `السلام عليكم ورحمة الله، أرغب في طلب عرض سعر من شركة رياض الخزامى:%0A%0A*الاسم/الجهة:* ${name}%0A*نوع المشروع:* ${service}%0A*التفاصيل:* ${message}`;
-    
-    // فتح واتساب
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    const message = document.getElementById('wa_message').value.trim();
+    if (!name || !message) { alert('يرجى كتابة الاسم وتفاصيل المشروع.'); return; }
+    const text = `السلام عليكم، أرغب في طلب عرض سعر من شركة رياض الخزامى:%0A%0A*الاسم/الجهة:* ${name}%0A*نوع المشروع:* ${service}%0A*التفاصيل:* ${message}`;
+    window.open(`https://wa.me/966549941540?text=${text}`, '_blank');
   }
 
-  /* ── SMOOTH SCROLL NAV LINKS ── */
+  /* ── SMOOTH SCROLL ── */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
 
-  /* ── INIT ── */
   checkStats();
 </script>
 </body>
