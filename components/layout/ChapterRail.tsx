@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
-import { SECTIONS } from "@/lib/constants";
+import { MEDIA, SECTIONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useChapter } from "@/providers/ChapterProvider";
 import { useSmoothScroll } from "@/providers/SmoothScrollProvider";
@@ -25,6 +25,14 @@ export function ChapterRail() {
     if (!fill || !rail) return;
 
     registerGsap();
+
+    // Without motion the rail is simply present from the start — it is a
+    // navigation aid, so it must never depend on an animation to appear.
+    if (window.matchMedia(MEDIA.reducedMotion).matches) {
+      gsap.set(rail, { autoAlpha: 1, x: 0 });
+      gsap.set(fill, { transformOrigin: "top center", scaleY: 1 });
+      return;
+    }
 
     const ctx = gsap.context(() => {
       gsap.set(fill, { transformOrigin: "top center", scaleY: 0 });

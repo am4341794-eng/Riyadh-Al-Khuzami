@@ -71,7 +71,7 @@ export function addSkyChapter(tl: gsap.core.Timeline, api: SceneApi) {
     // Near clouds travel much further — the parallax that sells speed and
     // altitude. The field is offset ahead of its rest position and ends behind
     // it, so clouds keep entering frame instead of all sweeping out at once.
-    const distance = 400 + depth * 1150;
+    const distance = 320 + depth * 880;
     const rise = 30 + depth * 120;
 
     tl.fromTo(

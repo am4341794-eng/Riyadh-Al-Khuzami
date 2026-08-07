@@ -132,20 +132,6 @@ export function addMorphChapter(tl: gsap.core.Timeline, api: SceneApi) {
       toPlane.start,
     );
 
-    MORPH_PARTS.forEach((part, index) => {
-      const bloom = one(`[data-bloom="${part.id}"]`);
-      if (!bloom) return;
-      tl.to(
-        bloom,
-        {
-          morphSVG: { shape: part.stages.plane, shapeIndex: "auto" },
-          fill: part.fill.plane,
-          ease: EASE.camera,
-          duration: planeSpan,
-        } as MorphVars,
-        toPlane.start + index * MORPH_STAGGER * 0.5,
-      );
-    });
   }
 
   /* ------------------------------------------------------- take-off arc */

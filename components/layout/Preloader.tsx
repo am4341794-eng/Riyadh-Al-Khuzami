@@ -1,10 +1,11 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { COMPANY } from "@/lib/content";
 import { ScrollTrigger } from "@/lib/gsap";
 import { useSmoothScroll } from "@/providers/SmoothScrollProvider";
+import { useReducedMotion } from "@/hooks/useMediaQuery";
 
 /** Fired once the curtain is clear so the hero can start its intro. */
 export const PRELOADER_DONE_EVENT = "rak:preloader-done";
@@ -29,6 +30,11 @@ export function Preloader() {
   const [dismissed, setDismissed] = useState(false);
   const { setLocked } = useSmoothScroll();
   const startedAt = useRef(0);
+  // Deliberately our own hook, not Framer's: this one is backed by
+  // useSyncExternalStore with a server snapshot of `false`, so the first client
+  // render matches the server HTML exactly. Framer's resolves in an effect and
+  // makes the curtain disappear mid-hydration, which React reports as a
+  // hydration mismatch.
   const prefersReduced = useReducedMotion();
 
   // Reduced motion skips the curtain entirely — derived, never set in an

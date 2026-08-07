@@ -27,6 +27,8 @@ export function JourneySection() {
     <section
       ref={sceneRef}
       aria-label="من الطريق إلى الأجواء"
+      data-scroll-section
+      data-journey
       className="section-shell h-[620svh] bg-void"
     >
       {/* Anchors: they give each chapter a nav target and a chapter-rail
@@ -50,7 +52,7 @@ export function JourneySection() {
         aria-hidden
       />
 
-      <div className="sticky top-0 h-svh overflow-hidden">
+      <div data-scroll-stage className="sticky top-0 h-svh overflow-hidden">
         <div data-camera className="absolute inset-0 origin-center will-change-transform">
           <JourneyScene />
         </div>
@@ -62,7 +64,7 @@ export function JourneySection() {
         />
         <div
           aria-hidden
-          className="absolute inset-x-0 top-0 h-[56%] bg-[linear-gradient(to_bottom,rgba(5,5,6,0.86)_0%,rgba(5,5,6,0.48)_46%,transparent_100%)]"
+          className="absolute inset-x-0 top-0 h-[74%] bg-[linear-gradient(to_bottom,rgba(5,5,6,0.84)_0%,rgba(5,5,6,0.6)_28%,rgba(5,5,6,0.26)_58%,rgba(5,5,6,0.08)_80%,transparent_100%)]"
         />
         <div
           aria-hidden
@@ -70,7 +72,7 @@ export function JourneySection() {
         />
 
         {/* ------------------------------------------------------- copy */}
-        <div className="pointer-events-none absolute inset-0">
+        <div data-journey-copy-wrap className="pointer-events-none absolute inset-0">
           <div className="mx-auto flex h-full max-w-[1600px] items-start px-[var(--spacing-gutter)] pt-[16svh]">
             <div className="relative w-full">
               <CopyBlock

@@ -33,6 +33,12 @@ function FrameBridge() {
 function GlobeRig({ quality }: { quality: "high" | "low" }) {
   const groupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
+  const size = useThree((state) => state.size);
+
+  // Portrait viewports need extra distance or the globe fills the frame and
+  // crowds the headline.
+  const aspect = size.width / Math.max(1, size.height);
+  const fitDistance = aspect < 1 ? 1 + (1 - aspect) * 0.85 : 1;
 
   useFrame(() => {
     const { progress: p, intro, pointerX, pointerY } = heroScene;
@@ -52,7 +58,7 @@ function GlobeRig({ quality }: { quality: "high" | "low" }) {
     camera.position.set(
       pointerX * 0.3,
       0.05 + pointerY * -0.2 + p * 1.0,
-      8.6 - (1 - intro) * 1.1 - p * 4.1,
+      (8.6 - (1 - intro) * 1.1 - p * 4.1) * fitDistance,
     );
     camera.lookAt(0, p * 0.25, 0);
     camera.updateProjectionMatrix();

@@ -38,10 +38,18 @@ export function createHeroTimeline(api: SceneApi) {
   /* ------------------------------------------------------------- entrance */
 
   if (reduced) {
+    // Present the hero fully resolved and stop. The scroll timeline below is
+    // motion by definition, so under reduced motion it is never built.
     heroScene.intro = 1;
     requestSceneFrame();
-    gsap.set([headline, eyebrow, lede, actions, hint, ...meta], { autoAlpha: 1 });
-  } else {
+    gsap.set([headline, eyebrow, lede, actions, hint, canvasWrap, ...meta], {
+      autoAlpha: 1,
+      clearProps: "transform,filter",
+    });
+    return;
+  }
+
+  {
     gsap.set([eyebrow, lede, actions, hint, ...meta], { autoAlpha: 0 });
 
     const intro = gsap.timeline({ paused: true, defaults: { ease: EASE.entrance } });
@@ -121,6 +129,9 @@ export function createHeroTimeline(api: SceneApi) {
     0,
   );
 
+  // The headline holds while the camera starts its push, then leaves. Starting
+  // both at once reads as the title dissolving before the visitor has finished
+  // reading it.
   tl.to(
     headline,
     {
@@ -129,13 +140,20 @@ export function createHeroTimeline(api: SceneApi) {
       autoAlpha: 0,
       filter: "blur(12px)",
       ease: EASE.camera,
+      duration: 0.82,
     },
-    0,
+    0.18,
   )
     .to(
       [eyebrow, lede, actions],
-      { yPercent: -70, autoAlpha: 0, ease: EASE.softInOut, stagger: 0.04 },
-      0,
+      {
+        yPercent: -70,
+        autoAlpha: 0,
+        ease: EASE.softInOut,
+        stagger: 0.04,
+        duration: 0.86,
+      },
+      0.12,
     )
     .to(hint, { autoAlpha: 0, y: 30, ease: "none", duration: 0.15 }, 0)
     .to(meta, { autoAlpha: 0, y: 24, ease: "none", stagger: 0.03 }, 0)

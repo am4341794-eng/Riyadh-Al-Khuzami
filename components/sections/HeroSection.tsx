@@ -65,9 +65,13 @@ export function HeroSection() {
       id="hero"
       ref={mergeRefs(chapterRef, sceneRef)}
       aria-label="مقدمة الشركة"
+      data-scroll-section
       className="section-shell h-[240svh]"
     >
-      <div className="hero-stage sticky top-0 grid h-svh place-items-center overflow-hidden">
+      <div
+        data-scroll-stage
+        className="hero-stage sticky top-0 grid h-svh place-items-center overflow-hidden"
+      >
           {/* ---------------------------------------------------- backdrop */}
           <div
             aria-hidden
@@ -90,7 +94,7 @@ export function HeroSection() {
           {/* Darkening pass that arrives as the camera pushes in. */}
           <div
             aria-hidden
-            className="hero-vignette anim-hidden absolute inset-0 bg-[radial-gradient(75%_60%_at_50%_50%,transparent_0%,rgba(5,5,6,0.75)_70%,#050506_100%)]"
+            className="hero-vignette absolute inset-0 opacity-0 bg-[radial-gradient(75%_60%_at_50%_50%,transparent_0%,rgba(5,5,6,0.75)_70%,#050506_100%)]"
           />
 
           {/* ------------------------------------------------------- copy */}

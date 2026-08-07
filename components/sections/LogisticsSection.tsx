@@ -18,9 +18,10 @@ export function LogisticsSection() {
       id="logistics"
       ref={mergeRefs(sceneRef, chapterRef)}
       aria-label={logistics.label}
+      data-scroll-section
       className="section-shell h-[340svh] bg-void"
     >
-      <div className="sticky top-0 h-svh overflow-hidden">
+      <div data-scroll-stage className="sticky top-0 h-svh overflow-hidden">
         {/* -------------------------------------------------------- scene */}
         <div data-camera className="absolute inset-0 origin-center will-change-transform">
           <WarehouseScene />
@@ -29,7 +30,7 @@ export function LogisticsSection() {
         {/* Readability scrim behind the copy column */}
         <div
           aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(to_left,rgba(5,5,6,0.94)_0%,rgba(5,5,6,0.72)_34%,transparent_62%)]"
+          className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,5,6,0.94)_0%,rgba(5,5,6,0.72)_46%,transparent_78%)] lg:bg-[linear-gradient(to_left,rgba(5,5,6,0.94)_0%,rgba(5,5,6,0.72)_34%,transparent_62%)]"
         />
         <div
           aria-hidden
@@ -41,7 +42,7 @@ export function LogisticsSection() {
         />
 
         {/* --------------------------------------------------------- copy */}
-        <div className="pointer-events-none absolute inset-0 flex items-center">
+        <div className="pointer-events-none absolute inset-0 flex items-start pt-[13svh] lg:items-center lg:pt-0">
           <div className="mx-auto flex w-full max-w-[1600px] px-[var(--spacing-gutter)]">
             <div data-copy className="anim-hidden max-w-lg">
               <div className="flex items-center gap-4">
@@ -83,7 +84,7 @@ export function LogisticsSection() {
         <div
           data-veil
           aria-hidden
-          className="anim-hidden pointer-events-none absolute inset-0 bg-void"
+          className="pointer-events-none absolute inset-0 opacity-0"
         />
       </div>
     </section>

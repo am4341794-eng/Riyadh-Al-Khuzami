@@ -91,12 +91,12 @@ export function createLogisticsTimeline(api: SceneApi) {
 
   tl.fromTo(
     camera,
-    { scale: viewport.isMobile ? 1.5 : 1.16, yPercent: 4, xPercent: 0 },
-    { scale: viewport.isMobile ? 1.34 : 1, yPercent: 0, xPercent: 0, ease: EASE.camera },
+    { scale: viewport.isMobile ? 1.18 : 1.2, yPercent: 4, xPercent: 0 },
+    { scale: viewport.isMobile ? 1.08 : 1.06, yPercent: 0, xPercent: 0, ease: EASE.camera },
     0,
   ).to(
     camera,
-    { scale: viewport.isMobile ? 1.44 : 1.1, yPercent: -5, ease: EASE.camera },
+    { scale: viewport.isMobile ? 1.16 : 1.16, yPercent: -4, ease: EASE.camera },
     0.68,
   );
 

@@ -229,6 +229,9 @@ export function WarehouseScene() {
         })}
       </g>
 
+      {/* The pallet and the forklift share a fit group so a narrow viewport can
+          scale the whole action down without changing a single timeline value. */}
+      <g data-wh-fit>
       {/* --------------------------------------------------- cargo pallet */}
       <g data-cargo transform={`translate(300 ${FLOOR_Y})`}>
         <ellipse data-cargo-shadow cx="76" cy="6" rx="96" ry="12" fill="#050506" opacity="0.55" />
@@ -333,6 +336,8 @@ export function WarehouseScene() {
         {/* Warning beacon */}
         <circle data-beacon cx="44" cy="-282" r="9" fill="#f0a868" opacity="0.9" />
         <circle data-beacon-glow cx="44" cy="-282" r="26" fill="#f0a868" opacity="0.2" filter="url(#wh-soft)" />
+      </g>
+
       </g>
 
       {/* -------------------------------------------------- near foreground */}

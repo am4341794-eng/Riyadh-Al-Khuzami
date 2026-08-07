@@ -6,8 +6,6 @@ import { MORPH_PARTS, TRUCK } from "@/lib/shapes";
 const { width: W, height: H } = SCENE_VIEWBOX;
 const HORIZON = 620;
 const ROAD_Y = TRUCK.groundY;
-/** Fits the 1600-unit-wide artwork comfortably inside the frame. */
-const VEHICLE_SCALE = 0.6;
 
 /** Soft cumulus built from overlapping ellipses — cheap and scales cleanly. */
 function Cloud({ id, puffs }: { id: string; puffs: Array<[number, number, number]> }) {
@@ -65,6 +63,10 @@ const CLOUDS: Array<{
   { key: "c11", shape: "a", x: 420, y: 680, scale: 1.15, depth: 0.86 },
   { key: "c12", shape: "c", x: 1240, y: 780, scale: 1.35, depth: 0.96 },
   { key: "c13", shape: "b", x: -60, y: 830, scale: 1.4, depth: 1 },
+  { key: "c14", shape: "a", x: 2050, y: 210, scale: 0.44, depth: 0.16 },
+  { key: "c15", shape: "b", x: 2340, y: 430, scale: 0.66, depth: 0.42 },
+  { key: "c16", shape: "c", x: 2180, y: 640, scale: 0.95, depth: 0.72 },
+  { key: "c17", shape: "a", x: 2620, y: 760, scale: 1.2, depth: 0.9 },
 ];
 
 /**
@@ -126,8 +128,15 @@ export function JourneyScene() {
           <stop offset="100%" stopColor="#1b1512" />
         </linearGradient>
 
-        <filter id="jr-glow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="26" />
+        <filter
+          id="jr-glow"
+          x="-12%"
+          y="-12%"
+          width="124%"
+          height="124%"
+          filterUnits="objectBoundingBox"
+        >
+          <feGaussianBlur stdDeviation="18" />
         </filter>
         <filter id="jr-soft" x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur stdDeviation="10" />
@@ -215,7 +224,7 @@ export function JourneyScene() {
             data-depth={cloud.depth}
             transform={`translate(${cloud.x} ${cloud.y}) scale(${cloud.scale})`}
             fill="#f3f7fb"
-            opacity={0.32 + cloud.depth * 0.5}
+            opacity={0.42 + cloud.depth * 0.48}
           >
             <Cloud id={cloud.key} puffs={CLOUD_SHAPES[cloud.shape]} />
           </g>
@@ -228,7 +237,12 @@ export function JourneyScene() {
       <g data-vehicle>
         <g
           data-vehicle-fit
-          transform={`translate(${W / 2} ${ROAD_Y}) scale(${VEHICLE_SCALE}) translate(${-W / 2} ${-ROAD_Y})`}
+          style={
+            {
+              "--fit-x": `${W / 2}px`,
+              "--fit-y": `${ROAD_Y}px`,
+            } as React.CSSProperties
+          }
         >
         {/* Contact shadow, tied to the truck chapter only */}
         <ellipse
@@ -255,7 +269,11 @@ export function JourneyScene() {
 
         {/* Blurred twin of the six shapes. It sits *under* the crisp paths so
             it reads as light spilling out, never as a smeared duplicate. */}
-        <g data-ribbon-bloom opacity="0">
+        {/* One filter on the group, not six on the paths: a single blur buffer
+            per frame instead of one per shape. The shapes are static ribbons —
+            they are blurred past recognition, so morphing them too would cost
+            six extra path interpolations a frame for no visible gain. */}
+        <g data-ribbon-bloom opacity="0" filter="url(#jr-glow)">
           {MORPH_PARTS.map((part) => (
             <path
               key={`bloom-${part.id}`}
@@ -263,7 +281,6 @@ export function JourneyScene() {
               d={part.stages.ribbon}
               fill={part.fill.ribbon}
               opacity="0.5"
-              filter="url(#jr-glow)"
             />
           ))}
         </g>

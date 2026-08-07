@@ -49,14 +49,14 @@ export function createJourneyTimeline(api: SceneApi) {
   if (camera) {
     tl.fromTo(
       camera,
-      { scale: viewport.isMobile ? 1.5 : 1.14, yPercent: 3 },
-      { scale: viewport.isMobile ? 1.36 : 1.04, yPercent: 0, ease: EASE.camera },
+      { scale: viewport.isMobile ? 1.16 : 1.18, yPercent: 3 },
+      { scale: viewport.isMobile ? 1.08 : 1.09, yPercent: 0, ease: EASE.camera },
       0,
     )
       .to(
         camera,
         {
-          scale: viewport.isMobile ? 1.3 : 1.02,
+          scale: viewport.isMobile ? 1.06 : 1.07,
           yPercent: -2,
           ease: EASE.camera,
           duration: 0.22,
@@ -66,7 +66,7 @@ export function createJourneyTimeline(api: SceneApi) {
       .to(
         camera,
         {
-          scale: viewport.isMobile ? 1.42 : 1.1,
+          scale: viewport.isMobile ? 1.14 : 1.16,
           yPercent: 2,
           ease: EASE.camera,
           duration: 0.3,

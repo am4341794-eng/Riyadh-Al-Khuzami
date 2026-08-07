@@ -240,6 +240,47 @@
   }
 }
 
+/* ==========================================================================
+   Scene fit
+   The scenes are drawn in a 1600 × 900 space and rendered with
+   `preserveAspectRatio="slice"`, so a portrait viewport only ever sees a
+   narrow vertical strip of it. Rather than re-authoring every scene per
+   breakpoint, the moving subjects sit in a "fit" group that is scaled down
+   and re-centred here. Timelines keep working in the original coordinate
+   space — no animation value changes with the viewport.
+   ========================================================================== */
+[data-vehicle-fit] {
+  --fit-scale: 0.6;
+  transform: translate(var(--fit-x), var(--fit-y)) scale(var(--fit-scale))
+    translate(calc(var(--fit-x) * -1), calc(var(--fit-y) * -1));
+}
+
+[data-wh-fit] {
+  transform: none;
+}
+
+@media (max-width: 1023px) {
+  [data-vehicle-fit] {
+    --fit-scale: 0.42;
+  }
+
+  /* 555 = 800 − 490 × 0.5 (centres the pick-up), 350 = 700 × (1 − 0.5)
+     (keeps the wheels on the warehouse floor). */
+  [data-wh-fit] {
+    transform: translate(555px, 350px) scale(0.5);
+  }
+}
+
+@media (max-width: 639px) {
+  [data-vehicle-fit] {
+    --fit-scale: 0.34;
+  }
+
+  [data-wh-fit] {
+    transform: translate(604px, 420px) scale(0.4);
+  }
+}
+
 /* Fine dotted rule used between chapters */
 .chapter-rule {
   height: 1px;
@@ -266,5 +307,54 @@
 
   .anim-hidden {
     opacity: 1 !important;
+  }
+
+  /* The tall sections exist to give their timelines room to scrub. With no
+     animation that room becomes several screens of a frozen image, so the
+     stages collapse back into ordinary document flow. */
+  [data-scroll-section] {
+    height: auto !important;
+  }
+
+  [data-scroll-stage] {
+    position: relative;
+    height: 100svh;
+  }
+
+  /* The journey's three captions share one frame and would otherwise overlap.
+     Without motion they stack and read as ordinary prose beneath the scene. */
+  [data-journey] [data-scroll-stage] {
+    height: auto;
+    padding-block: 4rem;
+  }
+
+  [data-journey] [data-camera] {
+    position: relative;
+    height: 62svh;
+  }
+
+  [data-journey-copy-wrap],
+  [data-journey-copy-wrap] > div,
+  [data-journey-copy-wrap] > div > div {
+    position: static;
+    display: block;
+    height: auto;
+    padding-top: 0;
+    pointer-events: auto;
+  }
+
+  [data-journey-copy] {
+    position: static;
+    inset: auto;
+    transform: none;
+    max-width: 42rem;
+    margin-inline: auto;
+    margin-block: 3rem 0;
+    text-align: start;
+  }
+
+  /* The stage's gradient scrims are only meaningful over a full-bleed scene. */
+  [data-journey] [data-scroll-stage] > [aria-hidden="true"] {
+    display: none;
   }
 }
