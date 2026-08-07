@@ -146,6 +146,16 @@
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+
+  /* SplitText re-wraps the contents in generated elements. `background-clip:
+     text` does not reach descendants, so without this the words inherit
+     `color: transparent` with nothing painted behind them and vanish. */
+  & * {
+    background-image: inherit;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 }
 
 @utility hairline {
@@ -198,6 +208,36 @@
   height: 100svh;
   width: 100%;
   overflow: hidden;
+}
+
+/* Pointer-parallax layers.
+   The transform is driven purely by two custom properties so GSAP's
+   scroll-driven inline transforms (applied to child elements) never collide
+   with the pointer response. Unitless vars are converted with calc(). */
+[data-parallax] {
+  --px: 0;
+  --py: 0;
+  transform: translate3d(calc(var(--px) * 1px), calc(var(--py) * 1px), 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax] {
+    transform: none;
+  }
+}
+
+/* The single looping animation on the page: the "scroll down" cue.
+   It exists to invite the first scroll, and is removed the moment one
+   happens — everything after that point is scroll-driven. */
+@keyframes scrollHint {
+  0% {
+    transform: translateY(-100%);
+  }
+  55%,
+  100% {
+    transform: translateY(250%);
+  }
 }
 
 /* Fine dotted rule used between chapters */
