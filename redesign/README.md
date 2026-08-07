@@ -1,5 +1,19 @@
 # رياض الخزامى — Scroll-driven landing experience
 
+> **This is a self-contained redesign experiment. It does not touch the live site.**
+>
+> The client's current site is the plain static `index.html` (plus its images and
+> `profile.pdf`) at the **repository root**. Those files are byte-identical to
+> `main` — verify with:
+>
+> ```bash
+> git diff main --stat -- . ':(exclude)redesign'   # prints nothing
+> ```
+>
+> Everything in this folder is new work. Nothing here is built, served or
+> deployed unless someone deliberately runs the commands below, so merging this
+> branch cannot change what visitors see today.
+
 A long-form, scroll-narrated landing page for **شركة رياض الخزامى المحدودة**
 (Riyadh Al Khozamah Co.), a Saudi contracting and hospital-fit-out firm.
 
@@ -22,7 +36,10 @@ behind it, and an invitation to talk.
 
 ## Commands
 
+All commands run from this `redesign/` folder, not the repository root.
+
 ```bash
+cd redesign
 npm install
 npm run dev        # http://localhost:3000
 npm run build      # production build
@@ -175,6 +192,17 @@ The hero's WebGL camera pulls back on narrow viewports for the same reason.
 - Verified in a headless software renderer: the SVG-heaviest chapters (morph,
   sky) hold 60fps when not rasterization-bound, so the animation work itself is
   not the limiting factor.
+
+## Relationship to the live site
+
+The root-level `index.html` and this app are independent. The app keeps its own
+copies of the brand assets under `public/brand/` (git stores identical content
+once, so the duplication costs nothing) precisely so that nothing here depends
+on — or can disturb — the files the live site serves.
+
+Content was *read* from the old site and re-typed into `lib/content.ts`: the
+company details, the six disciplines, the nine reference projects, the client
+list and the WhatsApp enquiry flow. The old file itself was never modified.
 
 ## Assets
 

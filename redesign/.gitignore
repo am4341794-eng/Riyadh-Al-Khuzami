@@ -1,0 +1,13 @@
+# Scoped to this folder. Nothing here touches the client's live site, which
+# lives untouched at the repository root.
+node_modules/
+.next/
+out/
+build/
+.DS_Store
+npm-debug.log*
+.env*
+next-env.d.ts
+.vercel
+*.tsbuildinfo
+.playwright/
