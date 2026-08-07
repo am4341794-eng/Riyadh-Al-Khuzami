@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens — exposed to Tailwind v4 as first-class utilities
+   ========================================================================== */
+@theme {
+  /* Surfaces */
+  --color-void: #050506;
+  --color-ink: #0a0b0d;
+  --color-carbon: #101114;
+  --color-graphite: #1a1c20;
+  --color-slate-deep: #24272c;
+
+  /* Brand gold */
+  --color-gold: #c9a84c;
+  --color-gold-light: #e8ce85;
+  --color-gold-pale: #f5e6c0;
+  --color-gold-deep: #8c6d2a;
+
+  /* Neutrals */
+  --color-sand: #f6f1e6;
+  --color-mist: #9aa2ad;
+  --color-smoke: #5d646e;
+
+  /* Spectrum used by the morph sequence */
+  --color-spectrum-1: #c9a84c;
+  --color-spectrum-2: #f0a868;
+  --color-spectrum-3: #ef6d85;
+  --color-spectrum-4: #7c6bf5;
+  --color-spectrum-5: #3fbfd4;
+  --color-spectrum-6: #7ee0a8;
+
+  /* Sky */
+  --color-sky-dawn: #1b2a4a;
+  --color-sky-noon: #4a86c8;
+  --color-sky-high: #9fd0ef;
+
+  /* Typography */
+  --font-sans: var(--font-tajawal), "Tajawal", system-ui, sans-serif;
+  --font-display: var(--font-amiri), "Amiri", "Tajawal", serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  /* Rhythm */
+  --spacing-gutter: 6vw;
+  --text-mega: clamp(3rem, 12vw, 11rem);
+  --text-display: clamp(2.25rem, 6.5vw, 6rem);
+  --text-heading: clamp(1.75rem, 3.6vw, 3.25rem);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto; /* Lenis owns scrolling */
+    background-color: var(--color-void);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-void);
+    color: var(--color-sand);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-gold);
+    color: var(--color-void);
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  svg {
+    display: block;
+  }
+
+  canvas {
+    display: block;
+    touch-action: pan-y;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@utility gpu {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+@utility text-balance-pretty {
+  text-wrap: pretty;
+}
+
+@utility gold-gradient-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-gold-deep) 0%,
+    var(--color-gold-pale) 38%,
+    var(--color-gold) 62%,
+    var(--color-gold-deep) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility hairline {
+  border: 1px solid color-mix(in srgb, var(--color-gold) 18%, transparent);
+}
+
+@utility glass {
+  background-color: color-mix(in srgb, var(--color-carbon) 72%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+@utility grain {
+  position: relative;
+  isolation: isolate;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    background-image: var(--grain-texture);
+    background-size: 180px 180px;
+  }
+}
+
+/* Elements that are animated in by GSAP start hidden to avoid a flash of
+   un-animated content. `.is-ready` is applied once the timelines are built. */
+@utility anim-hidden {
+  opacity: 0;
+}
+
+:root {
+  --grain-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Section scaffolding
+   ========================================================================== */
+.section-shell {
+  position: relative;
+  width: 100%;
+}
+
+.pin-stage {
+  position: relative;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Fine dotted rule used between chapters */
+.chapter-rule {
+  height: 1px;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--color-gold) 40%, transparent),
+    transparent
+  );
+}
+
+/* ==========================================================================
+   Reduced motion — the page stays legible and complete without animation
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .anim-hidden {
+    opacity: 1 !important;
+  }
+}
