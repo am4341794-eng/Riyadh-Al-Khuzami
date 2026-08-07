@@ -79,6 +79,7 @@ animations/
   logisticsTimeline.ts
   statsTimeline.ts
   ctaTimeline.ts
+  disciplinesTimeline.ts
   journeyTimeline.ts        # composes the three below onto one timeline
   journey/
     timings.ts              # chapter boundaries, deliberately overlapping
@@ -114,12 +115,25 @@ coexist, which is what removes the cut. Truck detailing fades out before the
 morph and aircraft detailing fades in after, so the silhouette that morphs is
 always clean. Navigation still sees three chapters via zero-height anchors.
 
+**Disciplines.** A horizontal gallery of the six engineering specialisations,
+driven by vertical scroll. The travel distance is measured from the DOM and
+re-measured on refresh, so the track always lands exactly on its last card.
+Card reveals are mapped to slices of the same scroll range rather than
+ScrollTrigger's `containerAnimation`, which assumes the track travels leftwards
+and therefore never resolves in RTL.
+
 **Statistics.** Unpinned, so the page breathes again after three pinned scenes.
 Counters write to `textContent` — a 60fps scrub costs zero React re-renders.
 Charts are revealed with DrawSVG.
 
-**CTA.** Large type via SplitText, magnetic buttons, a pointer-tracking glow
+**CTA.** Large type via SplitText, magnetic buttons, and a pointer-tracking glow
 written to custom properties so it can never collide with a scroll transform.
+The project request form composes the enquiry into a WhatsApp message and hands
+off to `wa.me` — the same flow the previous site used and the one this business
+answers on. There is no backend, so nothing is stored or transmitted anywhere
+the visitor cannot see. Validation is client-side and announced: each field owns
+an error node referenced by `aria-describedby`, and focus moves to the first
+problem on a failed submit.
 
 ---
 
@@ -146,6 +160,8 @@ The hero's WebGL camera pulls back on narrow viewports for the same reason.
 - Counters expose their final value via `aria-label`.
 - Skip link, visible focus rings, and a header nav that reflects the active
   chapter with `aria-current`.
+- Organization JSON-LD, `sitemap.xml` and `robots.txt` — a canvas-and-SVG page
+  is otherwise invisible to crawlers.
 
 ## Performance notes
 

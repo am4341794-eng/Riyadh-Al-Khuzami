@@ -8,6 +8,7 @@ import { createCtaTimeline } from "@/animations/ctaTimeline";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { RevealBlock } from "@/components/ui/RevealBlock";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { ProjectRequestForm } from "@/components/ui/ProjectRequestForm";
 
 const RULES = Array.from({ length: 11 }, (_, i) => i);
 const ORBS = [
@@ -114,6 +115,12 @@ export function CtaSection() {
             <MagneticButton href={CTA.secondary.href} variant="outline" download>
               {CTA.secondary.label}
             </MagneticButton>
+          </div>
+        </RevealBlock>
+
+        <RevealBlock delay={0.12}>
+          <div className="mt-16">
+            <ProjectRequestForm />
           </div>
         </RevealBlock>
 

@@ -6,6 +6,7 @@ import { Preloader } from "@/components/layout/Preloader";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { LogisticsSection } from "@/components/sections/LogisticsSection";
 import { JourneySection } from "@/components/sections/JourneySection";
+import { DisciplinesSection } from "@/components/sections/DisciplinesSection";
 import { StatsSection } from "@/components/sections/StatsSection";
 import { CtaSection } from "@/components/sections/CtaSection";
 
@@ -21,6 +22,7 @@ export default function Page() {
         <HeroSection />
         <LogisticsSection />
         <JourneySection />
+        <DisciplinesSection />
         <StatsSection />
         <CtaSection />
       </main>

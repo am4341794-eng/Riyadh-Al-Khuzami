@@ -33,7 +33,7 @@ export function StatsSection() {
 
       <div className="relative mx-auto max-w-[1600px] px-[var(--spacing-gutter)]">
         <SectionIntro
-          index="٠٦"
+          index="٠٧"
           label="الأرقام"
           title="سجل يُقاس"
           titleAccent="بالإنجاز"

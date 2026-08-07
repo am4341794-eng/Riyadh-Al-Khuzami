@@ -55,8 +55,9 @@ export const SECTIONS = [
   { id: "transport", label: "النقل", index: "03" },
   { id: "horizon", label: "التحوّل", index: "04" },
   { id: "sky", label: "الآفاق", index: "05" },
-  { id: "figures", label: "الأرقام", index: "06" },
-  { id: "contact", label: "التواصل", index: "07" },
+  { id: "disciplines", label: "التخصصات", index: "06" },
+  { id: "figures", label: "الأرقام", index: "07" },
+  { id: "contact", label: "التواصل", index: "08" },
 ] as const;
 
 export type SectionId = (typeof SECTIONS)[number]["id"];

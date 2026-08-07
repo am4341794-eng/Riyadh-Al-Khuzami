@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Tajawal, Amiri } from "next/font/google";
 import { COMPANY } from "@/lib/content";
+import { organizationJsonLd } from "@/lib/structuredData";
 import { SmoothScrollProvider } from "@/providers/SmoothScrollProvider";
 import { ChapterProvider } from "@/providers/ChapterProvider";
 import "@/styles/globals.css";
@@ -63,6 +64,14 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl" className={`${tajawal.variable} ${amiri.variable}`}>
       <body className="bg-void text-sand antialiased">
+        {/* The page is canvas and SVG; JSON-LD is how crawlers read the business. */}
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd()),
+          }}
+        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:right-4 focus:z-[999] focus:rounded-full focus:bg-gold focus:px-6 focus:py-3 focus:text-void"
